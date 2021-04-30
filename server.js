@@ -1,11 +1,20 @@
 const express = require("express");
 const app = express();
 
+// Router path
+const authRoute = require("./routes/auth");
+const registerRoute = require("./routes/register");
+
 // DB connection
 const connectDB = require("./config/db");
 connectDB();
 
+// Body parser
 app.use(express.json({ extended: false }));
+
+// Init Route
+app.use("/api/auth", authRoute);
+app.use("/api/register", registerRoute);
 
 const PORT = process.env.PORT || 5000;
 
