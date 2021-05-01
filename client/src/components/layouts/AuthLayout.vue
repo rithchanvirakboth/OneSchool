@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid auth-wrapper">
     <auth-nav />
-    <div class="row mb-3">
+    <div class="row mb-3 d-flex ">
       <div class="col-sm-12 col-lg-6">
         <hero-des />
       </div>
@@ -43,6 +43,9 @@
   .form-group input::placeholder {
     opacity: 50%;
   }
+  .form-group select {
+    padding: 0.5em;
+  }
   @media screen and (max-width: 786px) {
     .hero-img {
       display: none;
@@ -61,6 +64,7 @@
     }
     .form-group label,
     .form-group input,
+    .form-group select,
     .btn,
     .auth-option p {
       font-size: 12px;

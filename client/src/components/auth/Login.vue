@@ -54,7 +54,6 @@
 
     methods: {
       async onSubmit() {
-        console.log("hi");
         const config = {
           header: {
             "Content-Type": "application/json",
@@ -72,12 +71,11 @@
           console.log(res);
           // @todo: Later on have a Load User function inside VueX
           setAuthToken(res.data.token);
-
-          // Testing GET REQUEST
-          // @todo: Later implement into Vuex
         } catch (error) {
-          console.error(error.response.data.errors);
+          console.error(error.response.data);
         }
+        // Testing GET REQUEST
+        // @todo: Later implement into Vuex
 
         try {
           const res = await axios.get("/api/auth/");

@@ -2,12 +2,16 @@ import { createStore, createLogger } from "vuex";
 
 const store = createStore({
   state: {
-    user: {
-      name: "Andrew",
-      email: "andrew@gmail.com",
+    isAuthenticated: false,
+  },
+  mutations: {
+    isAuth(state) {
+      state.isAuthenticated = true;
+    },
+    isNotAuth(state) {
+      state.isAuthenticated = false;
     },
   },
-  mutations: {},
   actions: {},
   getters: {},
   modules: {},
