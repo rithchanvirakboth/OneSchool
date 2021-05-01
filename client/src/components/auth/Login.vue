@@ -39,6 +39,7 @@
 <script>
   import AuthLayout from "../layouts/AuthLayout";
   import axios from "axios";
+  import setAuthToken from "../../utils/setAuthToken";
   export default {
     name: "Login",
     data() {
@@ -67,9 +68,23 @@
             { email, password },
             config
           );
+          localStorage.setItem("token", res.data.token);
           console.log(res);
+          // @todo: Later on have a Load User function inside VueX
+          setAuthToken(res.data.token);
+
+          // Testing GET REQUEST
+          // @todo: Later implement into Vuex
         } catch (error) {
           console.error(error.response.data.errors);
+        }
+
+        try {
+          const res = await axios.get("/api/auth/");
+          console.log(res);
+          this.$router.push("/homepage");
+        } catch (error) {
+          console.error(error.response.data);
         }
       },
     },
