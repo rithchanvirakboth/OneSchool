@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 
 // Router path
@@ -12,6 +13,7 @@ connectDB();
 // Body parser
 app.use(express.json({ extended: false }));
 
+app.use(cors());
 // Init Route
 app.use("/api/auth", authRoute);
 app.use("/api/register", registerRoute);

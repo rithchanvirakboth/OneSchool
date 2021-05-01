@@ -1,15 +1,78 @@
 <template>
   <auth-layout>
-    Login Route with username {{ $store.state.user.name }}
+    <div class="form-wrapper mx-lg-5">
+      <form @submit.prevent="onSubmit">
+        <h3>
+          Start Connecting
+        </h3>
+        <div class="form-group mt-lg-4 mt-sm-1">
+          <label for="email">Email</label>
+          <input
+            name="email"
+            type="text"
+            class="form-control"
+            placeholder="Your email goes here"
+            v-model="email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            name="password"
+            type="password"
+            class="form-control"
+            placeholder="Don't forget your password"
+            v-model="password"
+          />
+        </div>
+        <div class="d-flex justify-content-end">
+          <input type="submit" value="Connect" class="btn one-school-btn  " />
+        </div>
+      </form>
+
+      <router-link to="/register" class="auth-option float-right mt-4">
+        <p>Don't have an account?</p>
+      </router-link>
+    </div>
   </auth-layout>
 </template>
 <script>
-  import authLayout from "../layouts/AuthLayout";
-
+  import AuthLayout from "../layouts/AuthLayout";
+  import axios from "axios";
   export default {
+    name: "Login",
+    data() {
+      return {
+        email: "",
+        password: "",
+      };
+    },
     components: {
-      authLayout,
+      AuthLayout,
+    },
+
+    methods: {
+      async onSubmit() {
+        console.log("hi");
+        const config = {
+          header: {
+            "Content-Type": "application/json",
+          },
+        };
+        const { email, password } = this;
+
+        try {
+          const res = await axios.post(
+            "/api/auth/",
+            { email, password },
+            config
+          );
+          console.log(res);
+        } catch (error) {
+          console.error(error.response.data.errors);
+        }
+      },
     },
   };
 </script>
-<style></style>
+<style scoped></style>
