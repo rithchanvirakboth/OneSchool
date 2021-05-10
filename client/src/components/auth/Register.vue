@@ -79,8 +79,6 @@
 </template>
 <script>
   import authLayout from "../layouts/AuthLayout";
-  import axios from "axios";
-  import setAuthToken from "../../utils/setAuthToken";
 
   export default {
     name: "Register",
@@ -100,28 +98,14 @@
     },
     methods: {
       async onSubmit() {
-        const config = {
-          header: {
-            "Content-Type": "application/json",
-          },
-        };
         const { username, email, major, reason, password } = this;
-
-        try {
-          const res = await axios.post(
-            "/api/register/",
-            { username, email, major, reason, password },
-            config
-          );
-          localStorage.setItem("token", res.data.token);
-          console.log(res);
-          // @todo: Later on have a Load User function inside VueX
-          setAuthToken(res.data.token);
-          this.$router.push("/homepage");
-          // @todo: Later implement into Vuex
-        } catch (error) {
-          console.error(error.response.data);
-        }
+        this.$store.dispatch("register", {
+          username,
+          email,
+          major,
+          reason,
+          password,
+        });
       },
     },
   };

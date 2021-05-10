@@ -5,6 +5,7 @@ const app = express();
 // Router path
 const authRoute = require("./routes/auth");
 const registerRoute = require("./routes/register");
+const postRoute = require("./routes/post");
 
 // DB connection
 const connectDB = require("./config/db");
@@ -17,6 +18,7 @@ app.use(cors());
 // Init Route
 app.use("/api/auth", authRoute);
 app.use("/api/register", registerRoute);
+app.use("/api/post", postRoute);
 
 const PORT = process.env.PORT || 5000;
 

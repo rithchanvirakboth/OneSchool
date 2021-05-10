@@ -47,6 +47,7 @@ router.post(
       if (!isMatched) return res.status(400).json({ msg: "Invalid password!" });
 
       // Registering JWT
+
       const payload = {
         user: {
           id: user.id,

@@ -19,6 +19,16 @@ const userSchema = new mongoose.Schema({
   reason: {
     type: String,
   },
+  dob: {
+    type: Date,
+  },
+  bio: {
+    type: String,
+  },
+  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  groups: [{ type: mongoose.Schema.Types.ObjectId, ref: "Group" }],
+  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
+
   date: {
     type: Date,
     default: Date.now,
