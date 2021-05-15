@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: true,
+    require: true,
   },
   email: {
     type: String,
@@ -27,8 +27,6 @@ const userSchema = new mongoose.Schema({
   },
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   groups: [{ type: mongoose.Schema.Types.ObjectId, ref: "Group" }],
-  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
-
   date: {
     type: Date,
     default: Date.now,

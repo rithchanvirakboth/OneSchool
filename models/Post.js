@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-  post_data: {
+  post_text: {
+    type: String,
+    require: true,
+  },
+  post_image: {
     type: String,
   },
   user: {

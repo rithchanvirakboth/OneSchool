@@ -13,11 +13,6 @@
 <script>
   export default {
     name: "HomePage",
-    created() {
-      if (localStorage.token) {
-        this.$store.commit("isAuth");
-      }
-    },
   };
 </script>
 

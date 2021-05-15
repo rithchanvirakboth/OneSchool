@@ -5,6 +5,11 @@
 <script>
   export default {
     name: "App",
+    created() {
+      if (localStorage.token) {
+        this.$store.commit("isAuth");
+      }
+    },
   };
 </script>
 
