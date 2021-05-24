@@ -6,13 +6,13 @@
           Create Connection
         </h3>
         <div class="form-group mt-4">
-          <label for="username">Username</label>
+          <label for="username">Name</label>
           <input
-            v-model="username"
-            name="username"
+            v-model="name"
+            name="name"
             type="text"
             class="form-control"
-            placeholder="Input username"
+            placeholder="Input name"
           />
         </div>
         <div class="form-group">
@@ -85,7 +85,7 @@
 
     data() {
       return {
-        username: "",
+        name: "",
         email: "",
         major: "computer science",
         reason: "to find solution",
@@ -98,9 +98,9 @@
     },
     methods: {
       async onSubmit() {
-        const { username, email, major, reason, password } = this;
+        const { name, email, major, reason, password } = this;
         this.$store.dispatch("register", {
-          username,
+          name,
           email,
           major,
           reason,

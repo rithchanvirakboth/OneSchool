@@ -4,6 +4,20 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 const Post = require("../models/Post");
 
+// @route     GET api/post
+// @desc      Getting posts
+// @access    Private
+
+router.get("/", auth, async (req, res) => {
+  try {
+    const posts = await Post.find({ user: req.user.id });
+    res.json(posts);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ msg: "Server Error!" });
+  }
+});
+
 // @route     POST api/post
 // @desc      Posting a post
 // @access    Private
@@ -19,19 +33,7 @@ router.post("/", auth, async (req, res) => {
     res.status(500).json({ msg: "Server Error!" });
   }
 });
-// @route     GET api/post
-// @desc      Getting posts
-// @access    Private
 
-router.get("/", auth, async (req, res) => {
-  try {
-    const posts = await Post.find({ user: req.user.id });
-    res.json(posts);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).json({ msg: "Server Error!" });
-  }
-});
 // @route     PUT api/post/:id
 // @desc      Updating posts
 // @access    Private
@@ -50,7 +52,7 @@ router.put("/:id", auth, async (req, res) => {
 
     // Make sure user owns the post
     if (post.user.toString() !== req.user.id)
-      return res.status(401).json({ msg: "No authorization!" });
+      return res.status(401).json({ msg: "No authorization over this post!" });
 
     post = await Post.findByIdAndUpdate(
       req.params.id,
@@ -59,8 +61,8 @@ router.put("/:id", auth, async (req, res) => {
     );
     res.json(post);
   } catch (error) {
-    console.error(error.message);
     console.error(error);
+    console.error(error.message);
     res.status(500).json({ msg: "Server Error!" });
   }
 });

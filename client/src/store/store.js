@@ -1,4 +1,4 @@
-import { createStore, createLogger } from "vuex";
+import { createStore } from "vuex";
 
 import axios from "axios";
 import router from "../router/router";
@@ -8,7 +8,7 @@ import setAuthToken from "../utils/setAuthToken";
 const store = createStore({
   state: {
     isAuthenticated: false,
-    user: "",
+    user: null,
     token: "",
   },
   mutations: {
@@ -76,7 +76,8 @@ const store = createStore({
       }
       try {
         const res = await axios.get("/api/auth/");
-        commit("setUser", res.data._id);
+        commit("setUser", res.data.user);
+
         router.push("/homepage");
       } catch (error) {
         console.error(error.response.data);
