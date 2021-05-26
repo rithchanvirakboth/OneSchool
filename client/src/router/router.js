@@ -6,6 +6,15 @@ import HomePage from "../components/pages/HomePage";
 import Profile from "../components/pages/Profile";
 
 import store from "../store/store";
+// const checkAuth = (to) => {
+//   if (
+//     to.name !== "Login" &&
+//     to.name !== "Register" &&
+//     !store.state.isAuthenticated
+//   ) {
+//     return "/";
+//   }
+// };
 
 const routes = [
   {
@@ -26,11 +35,15 @@ const routes = [
     meta: {
       requireAuth: true,
     },
+    // beforeEnter: [checkAuth],
   },
   {
     name: "Profile",
     path: "/profile",
     component: Profile,
+    meta: {
+      requireAuth: true,
+    },
   },
   {
     path: "/:pathMatch(.*)",
@@ -41,19 +54,10 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
-router.beforeEach((to, from) => {
-  if (
-    to.name !== "Login" &&
-    to.name !== "Register" &&
-    !store.state.isAuthenticated
-  ) {
-    return `${from.path}`;
-  }
-  if (
-    to.name === "Login" &&
-    to.name === "Register" &&
-    store.state.isAuthenticated
-  ) {
+router.beforeResolve(async (to, from) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requireAuth);
+  const canAccess = await store.dispatch("canAccess");
+  if (requiresAuth && !canAccess) {
     return `${from.path}`;
   }
 });

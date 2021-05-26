@@ -49,7 +49,6 @@
   /* Form style */
   .form-group input {
     padding: 0.5em;
-    color: #fff;
     outline: none;
   }
 

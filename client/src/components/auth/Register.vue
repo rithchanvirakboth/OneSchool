@@ -97,9 +97,9 @@
       authLayout,
     },
     created() {
-      if (this.$store.state.isAuthenticated) {
-        this.$router.push("/homepage");
-      }
+      // if (this.$store.state.isAuthenticated) {
+      //   this.$router.push("/homepage");
+      // }
     },
     methods: {
       async onSubmit() {

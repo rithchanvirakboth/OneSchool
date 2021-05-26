@@ -51,9 +51,9 @@
       AuthLayout,
     },
     created() {
-      if (this.isAuthenticated) {
-        this.$router.push("/homepage");
-      }
+      // if (this.$store.state.isAuthenticated) {
+      //   this.$router.push("/homepage");
+      // }
     },
     computed: {
       ...mapState(["isAuthenticated"]),

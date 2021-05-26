@@ -86,7 +86,21 @@ const store = createStore({
         commit("setUser", res.data.user);
         commit("isAuth");
         commit("isNotLoading");
+        console.log("isAuthenticated(store): ", this.state.isAuthenticated);
         router.push("/homepage");
+      } catch (error) {
+        console.error(error.response);
+      }
+    },
+
+    async canAccess() {
+      try {
+        const res = await axios.get("/api/auth/");
+        if (res) {
+          return true;
+        } else {
+          return false;
+        }
       } catch (error) {
         console.error(error.response);
       }
