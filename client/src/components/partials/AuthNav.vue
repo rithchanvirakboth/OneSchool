@@ -18,7 +18,7 @@
     data() {
       return {
         pathText: this.$route.matched[0].path === "/" ? "register" : "Login",
-        pathTo: this.$route.matched[0].path === "/" ? "register" : "/",
+        pathTo: this.$route.matched[0].path === "/" ? "/register" : "/",
       };
     },
   };

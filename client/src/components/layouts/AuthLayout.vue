@@ -21,13 +21,13 @@
     name: "AuthLayout",
   };
 </script>
-<style scoped>
+<style>
   .auth-wrapper {
     padding: 0 5em;
   }
   /* Form Style */
   .form-wrapper {
-    background: var(--one-school-primary);
+    background: var(--surface-l3);
     padding: 3em;
     padding-bottom: 5em;
     border-radius: 10px;

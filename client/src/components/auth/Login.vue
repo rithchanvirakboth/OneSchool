@@ -38,6 +38,7 @@
 </template>
 <script>
   import AuthLayout from "../layouts/AuthLayout";
+  import { mapState } from "vuex";
   export default {
     name: "Login",
     data() {
@@ -50,9 +51,12 @@
       AuthLayout,
     },
     created() {
-      if (this.$store.state.isAuthenticated) {
+      if (this.isAuthenticated) {
         this.$router.push("/homepage");
       }
+    },
+    computed: {
+      ...mapState(["isAuthenticated"]),
     },
     methods: {
       async onSubmit() {
