@@ -3,15 +3,15 @@
     <HomepageNav />
     <div class="container-fluid homepage-wrapper mt-4">
       <div class="row">
-        <div class="col-md-2 d-none d-md-block">
+        <div class="col-md-3 d-none d-md-block">
           <router-link to="/profile">
             <HomepageProfile />
           </router-link>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-6">
           <slot />
         </div>
-        <div class="col-md-3 d-none d-md-block hi">hi</div>
+        <div class="col-md-3 d-none d-md-block hi"></div>
       </div>
     </div>
   </div>

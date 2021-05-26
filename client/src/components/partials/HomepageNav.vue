@@ -2,12 +2,12 @@
   <div class="nav-wrapper">
     <div class="container-fluid">
       <div class="row align-items-center">
-        <div class="col-md-2 d-none d-md-block">
+        <div class="col-md-3 d-none d-md-block">
           <router-link to="/homepage">
             <img src="../../assets/OneSchool_Logo.png" alt="one_school_logo" />
           </router-link>
         </div>
-        <div class="col-md-7 col-sm-2">
+        <div class="col-md-6 col-sm-2">
           <form class="form  d-none d-md-block">
             <div class="form-group">
               <select>

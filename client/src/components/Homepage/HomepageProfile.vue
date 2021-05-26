@@ -12,22 +12,22 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6 follow">
+      <div class="col-12 follow">
         <p><span>108</span> Followers</p>
-      </div>
-      <div class="col-6 follow">
         <p><span>108</span> Followings</p>
       </div>
     </div>
     <div class="row bio">
       <div class="col-2">Bio:</div>
       <div class="col-10">
-        Nothing much, i just love desining and coding
+        <p>
+          Nothing much, i just love desining and coding
+        </p>
       </div>
     </div>
     <div class="row">
       <div class="col-12">
-        <div class="btn ghost-btn float-right mt-2">Edit profile</div>
+        <div class="btn ghost-btn float-right">Edit profile</div>
       </div>
     </div>
   </div>
@@ -52,12 +52,12 @@
 
 <style scoped>
   .profile-cta img {
-    width: 45px;
+    width: 55px;
     border-radius: 10px;
   }
   .smallProfile-wrapper {
     background: var(--surface-l1);
-    padding: 0.8em;
+    padding: 1.2em;
     border-radius: 10px;
   }
   .row {
@@ -65,26 +65,34 @@
   }
   .name p {
     margin: 0;
-    font-size: 16px;
+    font-size: 18px;
   }
   .name p:nth-child(2) {
-    font-size: 10px;
+    font-size: 12px;
     opacity: 50%;
   }
   .follow {
-    font-size: 10px;
+    font-size: 14px;
+    display: flex;
+    gap: 2em;
   }
   .follow span {
     font-weight: 600;
+  }
+  .follow:nth-child(1) {
+    padding-right: 0;
   }
   .follow:nth-child(2) {
     padding: 0;
   }
   .bio {
-    font-size: 10px;
+    font-size: 14px;
+  }
+  .bio p {
+    opacity: 50%;
   }
   .btn {
-    font-size: 10px;
+    font-size: 12px;
     margin-left: auto;
   }
 </style>
