@@ -60,6 +60,9 @@ router.beforeResolve(async (to, from) => {
   if (requiresAuth && !canAccess) {
     return `${from.path}`;
   }
+  if ((to.name === "Login" || to.name === "Register") && canAccess) {
+    return `/homepage`;
+  }
 });
 
 export default router;

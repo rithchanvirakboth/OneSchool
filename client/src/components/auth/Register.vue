@@ -96,11 +96,7 @@
     components: {
       authLayout,
     },
-    created() {
-      // if (this.$store.state.isAuthenticated) {
-      //   this.$router.push("/homepage");
-      // }
-    },
+
     methods: {
       async onSubmit() {
         const { name, email, major, reason, password } = this;

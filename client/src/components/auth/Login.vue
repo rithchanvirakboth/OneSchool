@@ -50,11 +50,7 @@
     components: {
       AuthLayout,
     },
-    created() {
-      // if (this.$store.state.isAuthenticated) {
-      //   this.$router.push("/homepage");
-      // }
-    },
+
     computed: {
       ...mapState(["isAuthenticated"]),
     },
