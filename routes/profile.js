@@ -2,6 +2,8 @@ const express = require("express");
 const multer = require("multer");
 const moment = require("moment");
 const router = express.Router();
+const auth = require("../middleware/auth");
+const User = require("../models/User");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -20,25 +22,20 @@ const fileFilter = (req, file, cb) => {
 };
 const upload = multer({ storage, fileFilter });
 
-const auth = require("../middleware/auth");
-const User = require("../models/User");
-
 // @route     PUT api/profile/:id
 // @desc      Updating Profile
 // @access    Private
 router.put("/:id", auth, upload.single("profileImage"), async (req, res) => {
-  console.log(req.body);
-  console.log(req.file);
   const { name, username, major, interest, bio } = req.body;
   const profileImage = req.file;
   const profileFields = {};
+
   if (name) profileFields.name = name;
   if (username) profileFields.username = username;
   if (major) profileFields.major = major;
   if (interest) profileFields.interest = interest;
   if (bio) profileFields.bio = bio;
   if (profileImage) profileFields.profileImage = profileImage.path;
-  console.log(profileFields);
 
   try {
     let user = await User.findById(req.params.id);

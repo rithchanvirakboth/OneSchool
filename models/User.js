@@ -31,7 +31,8 @@ const userSchema = new mongoose.Schema({
   bio: {
     type: String,
   },
-  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  followings: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   groups: [{ type: mongoose.Schema.Types.ObjectId, ref: "Group" }],
   date: {
     type: Date,

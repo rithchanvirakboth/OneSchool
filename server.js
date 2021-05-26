@@ -24,6 +24,8 @@ app.use(express.json());
 
 app.use(cors());
 // Init Route
+
+app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use("/api/auth", authRoute);
 app.use("/api/register", registerRoute);
 app.use("/api/post", postRoute);

@@ -8,8 +8,9 @@ import setAuthToken from "../utils/setAuthToken";
 const store = createStore({
   state: {
     isAuthenticated: false,
+    loading: true,
     user: null,
-    token: "",
+    token: localStorage.getItem("token"),
   },
   mutations: {
     isAuth(state) {
@@ -18,11 +19,14 @@ const store = createStore({
     isNotAuth(state) {
       state.isAuthenticated = false;
     },
+    isLoading(state) {
+      state.loading = true;
+    },
+    isNotLoading(state) {
+      state.loading = false;
+    },
     setUser(state, user) {
       state.user = user;
-    },
-    setToken(state, token) {
-      state.token = token;
     },
   },
   actions: {
@@ -38,7 +42,8 @@ const store = createStore({
 
         // Setting Token onto Local Storage
         localStorage.setItem("token", res.data.token);
-        commit("setToken", res.data.token);
+        commit("isAuth");
+        commit("isNotLoading");
 
         // Calling getUser to load user after login
         this.dispatch("getUser");
@@ -59,7 +64,8 @@ const store = createStore({
 
         // Setting Token onto Local Storage
         localStorage.setItem("token", res.data.token);
-        commit("setToken", res.data.token);
+        commit("isAuth");
+        commit("isNotLoading");
 
         // Calling getUser to load user after registering
         this.dispatch("getUser");
@@ -74,13 +80,15 @@ const store = createStore({
       if (localStorage.token) {
         setAuthToken(localStorage.token);
       }
+
       try {
         const res = await axios.get("/api/auth/");
         commit("setUser", res.data.user);
-
+        commit("isAuth");
+        commit("isNotLoading");
         router.push("/homepage");
       } catch (error) {
-        console.error(error.response.data);
+        console.error(error.response);
       }
     },
   },

@@ -32,12 +32,14 @@ router.post(
       if (foundUser)
         return res.status(400).json({ msg: "User already exists!" });
 
+      const profileImage = "uploads/profile_stub_image.png";
       const user = new User({
         name,
         email,
         password,
         major,
         reason,
+        profileImage,
       });
 
       // Hash password

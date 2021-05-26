@@ -21,7 +21,7 @@
     name: "AuthLayout",
   };
 </script>
-<style>
+<style scoped>
   .auth-wrapper {
     padding: 0 5em;
   }
@@ -37,15 +37,7 @@
   .form-wrapper h3 {
     font-weight: 600;
   }
-  .form-group input {
-    padding: 0.5em;
-  }
-  .form-group input::placeholder {
-    opacity: 50%;
-  }
-  .form-group select {
-    padding: 0.5em;
-  }
+
   @media screen and (max-width: 786px) {
     .hero-img {
       display: none;
