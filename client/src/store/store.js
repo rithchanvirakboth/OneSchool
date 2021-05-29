@@ -11,6 +11,7 @@ const store = createStore({
     loading: true,
     user: null,
     token: localStorage.getItem("token"),
+    isEdit: true,
   },
   mutations: {
     isAuth(state) {
@@ -27,6 +28,9 @@ const store = createStore({
     },
     setUser(state, user) {
       state.user = user;
+    },
+    setIsEdit(state, value) {
+      state.isEdit = value;
     },
   },
   actions: {

@@ -47,6 +47,7 @@
     color: #fff;
   }
   /* Form style */
+
   .form-group input {
     padding: 0.5em;
     outline: none;
@@ -57,6 +58,14 @@
   }
   .form-group select {
     padding: 0.5em;
+  }
+  .form-group-two {
+    display: flex;
+    flex-grow: 1;
+    gap: 1em;
+  }
+  .form-group-two .form-group {
+    flex-grow: 1;
   }
 
   /* Btn Global Style */

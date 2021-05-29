@@ -25,7 +25,7 @@
             placeholder="Input email address"
           />
         </div>
-        <div class="form-group-select">
+        <div class="form-group-two">
           <div class="form-group">
             <label for="major">What Major are you?</label>
             <select v-model="major" name="major" class="form-control ">
@@ -36,11 +36,11 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="reason">Why are you here?</label>
-            <select v-model="reason" name="reason" class="form-control">
-              <option value="to learn">To Learn</option>
-              <option value="to explore">To Explore</option>
-              <option value="to find solution">To find solution</option>
+            <label for="interests">Your interest?</label>
+            <select v-model="interests" name="interests" class="form-control">
+              <option value="Coding">Coding</option>
+              <option value="Math Solving">Math Solving</option>
+              <option value="Data Analyzing">Data Analyzing</option>
               <option value="other">Others....</option>
             </select>
           </div>
@@ -88,7 +88,7 @@
         name: "",
         email: "",
         major: "computer science",
-        reason: "to find solution",
+        interests: "to find solution",
         password: "",
         password2: "",
       };
@@ -99,25 +99,16 @@
 
     methods: {
       async onSubmit() {
-        const { name, email, major, reason, password } = this;
+        const { name, email, major, interests, password } = this;
         this.$store.dispatch("register", {
           name,
           email,
           major,
-          reason,
+          interests,
           password,
         });
       },
     },
   };
 </script>
-<style scoped>
-  .form-group-select {
-    display: flex;
-    flex-grow: 1;
-    gap: 1em;
-  }
-  .form-group-select .form-group {
-    flex-grow: 1;
-  }
-</style>
+<style scoped></style>

@@ -24,7 +24,7 @@ router.post(
     if (!errors.isEmpty())
       return res.status(400).json({ errors: errors.array() });
 
-    const { name, email, password, major, reason } = req.body;
+    const { name, email, password, major, interests } = req.body;
 
     try {
       const foundUser = await User.findOne({ email });
@@ -38,7 +38,7 @@ router.post(
         email,
         password,
         major,
-        reason,
+        interests,
         profileImage,
       });
 
