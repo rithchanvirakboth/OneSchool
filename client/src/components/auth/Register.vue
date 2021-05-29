@@ -88,13 +88,16 @@
         name: "",
         email: "",
         major: "computer science",
-        interests: "to find solution",
+        interests: "Coding",
         password: "",
         password2: "",
       };
     },
     components: {
       authLayout,
+    },
+    mounted() {
+      document.title = "Register";
     },
 
     methods: {

@@ -7,8 +7,8 @@
             <img src="../../assets/OneSchool_Logo.png" alt="one_school_logo" />
           </router-link>
         </div>
-        <div class="col-md-6 col-sm-2">
-          <form class="form  d-none d-md-block">
+        <div class="col-md-6 col-sm-2 ">
+          <form class="form d-none d-md-block">
             <div class="form-group">
               <select>
                 <option value="people">People</option>
@@ -47,7 +47,9 @@
     name: "HomepageNav",
     data() {
       return {
-        src: "http://localhost:5000/",
+        src: this.$store.state.user.profileImage.includes("uploads\\")
+          ? "http://localhost:5000/"
+          : "",
       };
     },
     computed: {
@@ -63,7 +65,7 @@
   .nav-wrapper {
     background-color: var(--surface-l1);
     padding: 0.8em 4em;
-    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 0px 5px rgba(0, 0, 0, 0.1); */
   }
   .nav-wrapper img {
     width: 10vmin;
@@ -78,6 +80,8 @@
     border-radius: 10px 0 0 10px;
     border: 0;
     outline: 0;
+    padding-left: 10px;
+    margin-left: 10px;
   }
   .form-group input {
     border-radius: 0 10px 10px 0;
@@ -115,6 +119,8 @@
   .profile-cta img {
     border-radius: 10px;
     width: 40px;
+    height: 40px;
+    object-fit: cover;
   }
 
   .loup img {

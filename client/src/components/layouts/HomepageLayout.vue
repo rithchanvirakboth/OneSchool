@@ -3,10 +3,8 @@
     <HomepageNav />
     <div class="container-fluid homepage-wrapper mt-4">
       <div class="row">
-        <div class="col-md-3 d-none d-md-block">
-          <!-- <router-link to="/profile"> -->
+        <div class="col-md-3 d-none d-md-block" style="padding: 0;">
           <HomepageProfile />
-          <!-- </router-link> -->
         </div>
         <div class="col-md-6">
           <slot />
@@ -14,7 +12,9 @@
         <div class="col-md-3 d-none d-md-block hi"></div>
       </div>
     </div>
-    <ProfileEdit v-if="$store.state.isEdit" />
+    <transition name="slide-fade">
+      <ProfileEdit v-if="$store.state.isEdit" />
+    </transition>
   </div>
 </template>
 
@@ -35,6 +35,20 @@
 
   .hi {
     background: var(--surface-l1);
+    border-radius: 10px;
+  }
+  .slide-fade-enter-active {
+    transition: all 0.3s ease-out;
+  }
+
+  .slide-fade-leave-active {
+    transition: all 0.3s ease-out;
+  }
+
+  .slide-fade-enter-from,
+  .slide-fade-leave-to {
+    transform: translateY(-20px);
+    opacity: 0;
   }
 
   @media screen and (max-width: 786px) {

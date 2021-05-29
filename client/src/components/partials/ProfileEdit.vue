@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid profile-edit-wrapper" @click="clickOutside">
     <div class="form-wrapper edit-container">
-      <form @submit.prevent="onSubmit">
+      <form @submit.prevent="onSubmit" enctype="multipart/form-data">
         <h3>
           Edit Profile
         </h3>
@@ -27,22 +27,32 @@
             />
           </div>
         </div>
-        <div class="form-group image-upload">
+        <div class="form-group">
           <label for="image">Profile Image</label>
-          <input
-            name="imageText"
-            type="text"
-            class="form-control"
-            placeholder="Image URL or Upload local image"
-            v-model="imageText"
-          />
-          <div class="upload-btn-container">
-            <input type="file" name="image" class="uploadBtn" />
-            <input
-              type="button"
-              value="Upload"
-              class="fakeUpload one-school-btn"
-            />
+          <div class="image-upload">
+            <div class="image-text">
+              <input
+                name="imageText"
+                type="text"
+                class="form-control"
+                placeholder="Image URL or Upload local image"
+                v-model="imageText"
+              />
+            </div>
+            <div class="upload-btn-container">
+              <input
+                type="file"
+                name="profileImage"
+                class="uploadBtn"
+                accept="image/*"
+                @change="onFileSelected"
+              />
+              <input
+                type="button"
+                value="Upload"
+                class="fakeUpload one-school-btn"
+              />
+            </div>
           </div>
         </div>
 
@@ -82,6 +92,7 @@
             class="form-control"
             name="bio"
             maxlength="80"
+            placeholder="Describe yourself here"
           ></textarea>
         </div>
 
@@ -92,7 +103,11 @@
           >
             Cancel
           </button>
-          <input type="submit" value="Update" class="btn one-school-btn ml-3" />
+          <input
+            type="submit"
+            value="Save Change"
+            class="btn one-school-btn ml-3"
+          />
         </div>
       </form>
     </div>
@@ -100,8 +115,6 @@
 </template>
 
 <script>
-  //   import { mapState } from "vuex";
-
   export default {
     data() {
       const user = this.$store.state.user;
@@ -112,6 +125,7 @@
         interests: user.interests,
         bio: user.bio,
         imageText: "",
+        profileImage: null,
       };
     },
     mounted() {
@@ -131,6 +145,28 @@
           this.cancel();
         }
       },
+      onFileSelected(e) {
+        const file = e.target.files[0];
+        this.profileImage = file;
+        this.imageText = file.name;
+      },
+      async onSubmit() {
+        const formData = new FormData();
+        formData.append("name", this.name);
+        formData.append("username", this.username);
+        formData.append("major", this.major);
+        formData.append("interests", this.interests);
+        formData.append("bio", this.bio);
+        formData.append(
+          "profileImage",
+          this.profileImage ? this.profileImage : this.imageText
+        );
+        this.$store.dispatch("editProfile", formData);
+        // Close the edit tabs
+        this.cancel();
+        // Reload page to brings back data
+        location.reload();
+      },
     },
   };
 </script>
@@ -144,7 +180,7 @@
     right: 0;
     display: flex;
     justify-content: center;
-    background: #6f6f6f6a;
+    background: #00000058;
     padding: 2em;
     padding-bottom: 8em;
   }
@@ -152,17 +188,20 @@
     transition: 0.3s ease-in;
   }
   .image-upload {
-    position: relative;
+    display: flex;
+    align-items: center;
   }
-  .upload-btn-container {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    width: fit-content;
+  .image-upload .image-text {
+    flex: 1;
+  }
+
+  .image-text input {
+    border-radius: 5px 0 0 5px;
   }
   .form-group .uploadBtn {
     position: absolute;
     opacity: 0;
+    width: 70px;
   }
   .form-group .uploadBtn::-webkit-file-upload-button {
     cursor: pointer;
@@ -170,11 +209,11 @@
     background: #6f6f6f6a;
     position: absolute;
     left: 0;
-    width: 80px;
   }
   .form-group .fakeUpload {
     font-size: 12px;
-    border-radius: 5px;
+    padding: 1em;
+    border-radius: 0 5px 5px 0;
     cursor: pointer;
     border: 0;
     background: #627d98;

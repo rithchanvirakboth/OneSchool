@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
   major: {
     type: String,
   },
-  reason: {
+  interest: {
     type: String,
   },
   dob: {

@@ -26,16 +26,16 @@ const upload = multer({ storage, fileFilter });
 // @desc      Updating Profile
 // @access    Private
 router.put("/:id", auth, upload.single("profileImage"), async (req, res) => {
-  const { name, username, major, interest, bio } = req.body;
-  const profileImage = req.file;
+  const { name, username, major, interests, bio } = req.body;
+  const profileImage = req.file ? req.file.path : req.body.profileImage;
   const profileFields = {};
 
   if (name) profileFields.name = name;
   if (username) profileFields.username = username;
   if (major) profileFields.major = major;
-  if (interest) profileFields.interest = interest;
+  if (interests) profileFields.interests = interests;
   if (bio) profileFields.bio = bio;
-  if (profileImage) profileFields.profileImage = profileImage.path;
+  if (profileImage) profileFields.profileImage = profileImage;
 
   try {
     let user = await User.findById(req.params.id);

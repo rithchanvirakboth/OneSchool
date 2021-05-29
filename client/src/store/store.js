@@ -11,7 +11,7 @@ const store = createStore({
     loading: true,
     user: null,
     token: localStorage.getItem("token"),
-    isEdit: true,
+    isEdit: false,
   },
   mutations: {
     isAuth(state) {
@@ -34,6 +34,40 @@ const store = createStore({
     },
   },
   actions: {
+    // @des: Load User
+    async getUser({ commit }) {
+      // If there's a token, then set the token to header
+      if (localStorage.token) {
+        setAuthToken(localStorage.token);
+      }
+
+      try {
+        const res = await axios.get("/api/auth/");
+        commit("setUser", res.data.user);
+        commit("isAuth");
+        commit("isNotLoading");
+        router.push("/homepage");
+      } catch (error) {
+        console.error(error.response);
+      }
+    },
+    // @desc: Testing if user can access to data
+    async canAccess() {
+      try {
+        if (!localStorage.token) {
+          return false;
+        }
+        const res = await axios.get("/api/auth/");
+        if (res) {
+          return true;
+        } else {
+          return false;
+        }
+      } catch (error) {
+        console.error(error.response);
+      }
+    },
+
     // @des: Login User
     async login({ commit }, formData) {
       const config = {
@@ -78,37 +112,16 @@ const store = createStore({
       }
     },
 
-    // @des: Load User
-    async getUser({ commit }) {
-      // If there's a token, then set the token to header
-      if (localStorage.token) {
-        setAuthToken(localStorage.token);
-      }
-
+    // @des: Edit Profile
+    async editProfile({ commit }, formData) {
       try {
-        const res = await axios.get("/api/auth/");
+        const res = await axios.put(
+          `/api/profile/${this.state.user._id}`,
+          formData
+        );
         commit("setUser", res.data.user);
-        commit("isAuth");
-        commit("isNotLoading");
-        router.push("/homepage");
       } catch (error) {
-        console.error(error.response);
-      }
-    },
-
-    async canAccess() {
-      try {
-        if (!localStorage.token) {
-          return false;
-        }
-        const res = await axios.get("/api/auth/");
-        if (res) {
-          return true;
-        } else {
-          return false;
-        }
-      } catch (error) {
-        console.error(error.response);
+        console.error(error.response.data);
       }
     },
   },

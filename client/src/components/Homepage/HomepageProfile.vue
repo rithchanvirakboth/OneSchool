@@ -7,7 +7,7 @@
       </div>
       <div class="col-4 text-center">
         <div class="profile-cta">
-          <img :src="src + user.profileImage" alt="profile_iamge" />
+          <img :src="src + user.profileImage" alt="profile_image" />
         </div>
       </div>
     </div>
@@ -44,7 +44,9 @@
   export default {
     data() {
       return {
-        src: "http://localhost:5000/",
+        src: this.$store.state.user.profileImage.includes("uploads\\")
+          ? "http://localhost:5000/"
+          : "",
       };
     },
 
@@ -62,6 +64,7 @@
     },
     mounted() {
       console.log(this.user);
+      document.title = "Homepage";
     },
     methods: {
       openEdit() {
@@ -80,8 +83,10 @@
 
 <style scoped>
   .profile-cta img {
-    width: 55px;
     border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
   }
   .smallProfile-wrapper {
     background: var(--surface-l1);
@@ -90,18 +95,18 @@
     cursor: pointer;
   }
   .row {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.2em;
   }
   .name p {
     margin: 0;
-    font-size: 18px;
+    font-size: 20px;
   }
   .name p:nth-child(2) {
     font-size: 12px;
     opacity: 50%;
   }
   .follow {
-    font-size: 14px;
+    font-size: 15px;
     display: flex;
     gap: 2em;
   }
@@ -115,7 +120,7 @@
     padding: 0;
   }
   .bio {
-    font-size: 14px;
+    font-size: 13px;
   }
   .bio p {
     opacity: 50%;

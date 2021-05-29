@@ -20,9 +20,9 @@
     --one-school-primary: #03dac5;
     --one-school-secondary: #627d98;
     --one-school-danger: #cf6679;
-    --surface-l1: #1c1f23;
-    --surface-l2: #20252a;
-    --surface-l3: #252c32;
+    --surface-l1: #20252a;
+    --surface-l2: #252c32;
+    --surface-l3: #2a333b;
   }
   * {
     margin: 0;
@@ -54,10 +54,10 @@
   }
 
   .form-group input::placeholder {
-    opacity: 50%;
+    opacity: 0.7;
   }
   .form-group select {
-    padding: 0.5em;
+    /* padding: 0.5em; */
   }
   .form-group-two {
     display: flex;
@@ -71,7 +71,7 @@
   /* Btn Global Style */
   .one-school-btn {
     color: #ffff;
-    background: var(--one-school-secondary);
+    background: var(--one-school-primary);
     transition: 0.2s ease-in;
   }
   .one-school-btn:hover {

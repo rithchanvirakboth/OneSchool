@@ -50,6 +50,9 @@
     components: {
       AuthLayout,
     },
+    mounted() {
+      document.title = "Login";
+    },
 
     computed: {
       ...mapState(["isAuthenticated"]),
