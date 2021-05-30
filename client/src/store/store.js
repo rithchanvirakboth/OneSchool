@@ -12,6 +12,7 @@ const store = createStore({
     user: null,
     token: localStorage.getItem("token"),
     isEdit: false,
+    openMenu: false,
   },
   mutations: {
     isAuth(state) {
@@ -31,6 +32,9 @@ const store = createStore({
     },
     setIsEdit(state, value) {
       state.isEdit = value;
+    },
+    setOpenMenu(state, value) {
+      state.openMenu = value;
     },
   },
   actions: {
@@ -111,7 +115,14 @@ const store = createStore({
         console.error(error.response.data);
       }
     },
-
+    logout({ commit }) {
+      localStorage.removeItem("token");
+      commit("isNotAuth");
+      commit("setUser", null);
+      commit("setOpenMenu", false);
+      commit("setIsEdit", false);
+      router.push("/");
+    },
     // @des: Edit Profile
     async editProfile({ commit }, formData) {
       try {

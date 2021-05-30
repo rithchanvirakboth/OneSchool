@@ -1,12 +1,12 @@
 <template>
   <div style="position: relative;">
     <HomepageNav />
-    <div class="container-fluid homepage-wrapper mt-4">
+    <div class="container-fluid homepage-wrapper mt-md-4">
       <div class="row">
         <div class="col-md-3 d-none d-md-block" style="padding: 0;">
           <HomepageProfile />
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 posts-wrapper">
           <slot />
         </div>
         <div class="col-md-3 d-none d-md-block hi"></div>
@@ -53,6 +53,11 @@
 
   @media screen and (max-width: 786px) {
     .homepage-wrapper {
+      padding: 15px;
+    }
+  }
+  @media screen and (max-width: 599px) {
+    .posts-wrapper {
       padding: 0;
     }
   }

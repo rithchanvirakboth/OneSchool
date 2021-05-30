@@ -98,7 +98,7 @@
 
         <div class="d-flex justify-content-end">
           <button
-            style="background: transparent; border: 0; color: #fff; cursor: pointer"
+            style="background: transparent; border: 0; color: #fff; cursor: pointer; font-size:14px;"
             @click="cancel"
           >
             Cancel
@@ -152,15 +152,19 @@
       },
       async onSubmit() {
         const formData = new FormData();
-        formData.append("name", this.name);
-        formData.append("username", this.username);
-        formData.append("major", this.major);
-        formData.append("interests", this.interests);
-        formData.append("bio", this.bio);
+        const { name, username, major, interests, bio } = this;
+
+        if (name) formData.append("name", name);
+        if (username) formData.append("username", username);
+        if (major) formData.append("major", major);
+        if (interests) formData.append("interests", interests);
+        if (bio) formData.append("bio", bio);
+
         formData.append(
           "profileImage",
           this.profileImage ? this.profileImage : this.imageText
         );
+
         this.$store.dispatch("editProfile", formData);
         // Close the edit tabs
         this.cancel();
@@ -171,8 +175,9 @@
   };
 </script>
 
-<style scope>
+<style scoped>
   .profile-edit-wrapper {
+    z-index: 100;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -182,47 +187,34 @@
     justify-content: center;
     background: #00000058;
     padding: 2em;
-    padding-bottom: 8em;
+    padding-bottom: 10em;
   }
   .edit-container {
     transition: 0.3s ease-in;
+    width: 550px;
+    max-width: 100%;
+  }
+  .form-group {
+    font-size: 14px;
+  }
+  .form-group input,
+  .form-group textarea {
+    font-size: 14px;
   }
   .image-upload {
     display: flex;
     align-items: center;
   }
+  .form-group .fakeUpload {
+    font-size: 10.5px;
+  }
   .image-upload .image-text {
     flex: 1;
   }
-
   .image-text input {
     border-radius: 5px 0 0 5px;
   }
-  .form-group .uploadBtn {
-    position: absolute;
-    opacity: 0;
-    width: 70px;
-  }
-  .form-group .uploadBtn::-webkit-file-upload-button {
-    cursor: pointer;
-    border: 0;
-    background: #6f6f6f6a;
-    position: absolute;
-    left: 0;
-  }
-  .form-group .fakeUpload {
-    font-size: 12px;
-    padding: 1em;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-    border: 0;
-    background: #627d98;
-    color: #fff;
-  }
-  .form-group textarea {
-    padding: 0.5em 1em;
-    resize: none;
-    width: 100%;
-    height: 100px;
+  .btn {
+    font-size: 14px;
   }
 </style>

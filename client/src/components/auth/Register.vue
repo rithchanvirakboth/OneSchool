@@ -29,10 +29,10 @@
           <div class="form-group">
             <label for="major">What Major are you?</label>
             <select v-model="major" name="major" class="form-control ">
-              <option value="computer science">Computer Science</option>
-              <option value="maths">Maths</option>
-              <option value="physics">Physics</option>
-              <option value="engineering">Engineering</option>
+              <option value="Computer science">Computer Science</option>
+              <option value="Maths">Maths</option>
+              <option value="Physics">Physics</option>
+              <option value="Engineering">Engineering</option>
             </select>
           </div>
           <div class="form-group">
@@ -87,7 +87,7 @@
       return {
         name: "",
         email: "",
-        major: "computer science",
+        major: "Computer science",
         interests: "Coding",
         password: "",
         password2: "",

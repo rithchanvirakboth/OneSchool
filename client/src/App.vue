@@ -23,6 +23,7 @@
     --surface-l1: #20252a;
     --surface-l2: #252c32;
     --surface-l3: #2a333b;
+    --surface-l4: #323d48;
   }
   * {
     margin: 0;
@@ -84,24 +85,55 @@
   .ghost-btn:hover {
     background: rgba(255, 255, 255, 0.1);
   }
-  /* custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 20px;
-  }
 
-  ::-webkit-scrollbar-track {
-    background-color: transparent;
+  /* Upload btn and fake btn */
+  .form-group .uploadBtn {
+    position: absolute;
+    opacity: 0;
+    width: 70px;
   }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: #d6dee1;
-    border-radius: 20px;
-    border: 6px solid transparent;
-    background-clip: content-box;
+  .form-group .uploadBtn::-webkit-file-upload-button {
+    cursor: pointer;
+    border: 0;
+    background: #6f6f6f6a;
+    position: absolute;
+    left: 0;
   }
+  .form-group .fakeUpload {
+    font-size: 12px;
+    padding: 1em;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    border: 0;
+    background: #627d98;
+    color: #fff;
+  }
+  .form-group textarea {
+    padding: 0.5em 1em;
+    resize: none;
+    width: 100%;
+    height: 100px;
+  }
+  @media screen and (min-width: 867px) {
+    /* custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 18px;
+    }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: #a8bbbf;
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--one-school-secondary);
+      border-radius: 20px;
+      border: 6px solid transparent;
+      background-clip: content-box;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #a8bbbf;
+    }
   }
   /* Stub image */
   .profile_image {

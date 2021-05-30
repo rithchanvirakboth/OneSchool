@@ -5,7 +5,7 @@
         <p>{{ user.name }}</p>
         <p>@{{ user.username }}</p>
       </div>
-      <div class="col-4 text-center">
+      <div class="col-4 d-flex justify-content-end">
         <div class="profile-cta">
           <img :src="src + user.profileImage" alt="profile_image" />
         </div>
@@ -44,9 +44,11 @@
   export default {
     data() {
       return {
-        src: this.$store.state.user.profileImage.includes("uploads\\")
-          ? "http://localhost:5000/"
-          : "",
+        src:
+          this.$store.state.user.profileImage.includes("uploads\\") ||
+          this.$store.state.user.profileImage.includes("uploads/")
+            ? "http://localhost:5000/"
+            : "",
       };
     },
 
@@ -84,8 +86,8 @@
 <style scoped>
   .profile-cta img {
     border-radius: 10px;
-    width: 60px;
-    height: 60px;
+    width: 65px;
+    height: 65px;
     object-fit: cover;
   }
   .smallProfile-wrapper {
@@ -106,7 +108,7 @@
     opacity: 50%;
   }
   .follow {
-    font-size: 15px;
+    font-size: 14px;
     display: flex;
     gap: 2em;
   }
@@ -124,6 +126,9 @@
   }
   .bio p {
     opacity: 50%;
+  }
+  .bio .col-10 {
+    padding-left: 0;
   }
   .btn {
     font-size: 12px;

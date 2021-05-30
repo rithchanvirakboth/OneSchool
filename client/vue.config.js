@@ -9,6 +9,6 @@ module.exports = {
         pathRewrite: { "^/api": "/" },
       },
     },
-    host: "oneschool.co.local",
+    host: "oneschool.co",
   },
 };

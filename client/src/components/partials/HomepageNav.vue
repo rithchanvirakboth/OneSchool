@@ -16,8 +16,7 @@
               <input
                 class="form-control mr-sm-2"
                 type="search"
-                placeholder="Search"
-                aria-label="Search"
+                placeholder="Search people here...."
               />
             </div>
           </form>
@@ -29,33 +28,54 @@
               <img src="../../assets/search.png" alt="" />
             </a>
           </div>
-          <router-link to="#">
+          <div @click="openMenu" style="z-index: 21">
             <div class="profile-cta">
               <p>{{ firstName }}</p>
               <img :src="src + user.profileImage" alt="profile_iamge" />
             </div>
-          </router-link>
+          </div>
         </div>
       </div>
     </div>
+    <DropMenu v-if="$store.state.openMenu" />
   </div>
 </template>
 
 <script>
   import { mapState } from "vuex";
+  import DropMenu from "./DropMenu";
   export default {
     name: "HomepageNav",
     data() {
       return {
-        src: this.$store.state.user.profileImage.includes("uploads\\")
-          ? "http://localhost:5000/"
-          : "",
+        src:
+          this.$store.state.user.profileImage.includes("uploads\\") ||
+          this.$store.state.user.profileImage.includes("uploads/")
+            ? "http://localhost:5000/"
+            : "",
       };
+    },
+    components: {
+      DropMenu,
     },
     computed: {
       ...mapState(["user"]),
       firstName() {
         return this.user.name.split(" ")[0];
+      },
+    },
+    methods: {
+      openMenu() {
+        console.log(this.$store.state.openMenu);
+        this.$store.commit("setOpenMenu", !this.$store.state.openMenu);
+      },
+      cancel() {
+        this.$store.commit("setOpenMenu", false);
+      },
+      clickOutside(e) {
+        if (e.target.classList.contains("dropdown-wrapper")) {
+          this.cancel();
+        }
       },
     },
   };
@@ -66,6 +86,7 @@
     background-color: var(--surface-l1);
     padding: 0.8em 4em;
     /* box-shadow: 0 0px 5px rgba(0, 0, 0, 0.1); */
+    position: relative;
   }
   .nav-wrapper img {
     width: 10vmin;
@@ -93,6 +114,9 @@
   .form-group input:focus,
   .form-group input::placeholder {
     color: #fff;
+  }
+  .form-group input::placeholder {
+    opacity: 0.5;
   }
   .form-group input,
   .form-group select {

@@ -31,8 +31,6 @@
     padding: 3em;
     padding-bottom: 5em;
     border-radius: 10px;
-    /* width: 600px;
-    max-width: 100%; */
   }
   .form-wrapper h3 {
     font-weight: 600;

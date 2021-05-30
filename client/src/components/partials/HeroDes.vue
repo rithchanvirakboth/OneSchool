@@ -29,7 +29,7 @@
   };
 </script>
 
-<style scope>
+<style scoped>
   .hero-title h1 {
     font-weight: 900;
     font-size: 6vmin;

@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
   },
   username: {
     type: String,
+    default: "",
   },
   profileImage: {
     type: String,
@@ -22,7 +23,7 @@ const userSchema = new mongoose.Schema({
   major: {
     type: String,
   },
-  interest: {
+  interests: {
     type: String,
   },
   dob: {
@@ -30,6 +31,7 @@ const userSchema = new mongoose.Schema({
   },
   bio: {
     type: String,
+    default: "",
   },
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   followings: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
